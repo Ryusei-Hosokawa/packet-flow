@@ -6,7 +6,7 @@
 	import PacketInfo from './PacketInfo.svelte';
 </script>
 
-<div class="space-y-8">
+<div class="space-y-6">
 	<!-- メインビジュアル -->
 	<div class="rounded-lg border border-border bg-card p-8">
 		<div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 1rem;">
