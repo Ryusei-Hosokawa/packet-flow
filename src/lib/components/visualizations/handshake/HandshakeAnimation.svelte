@@ -8,13 +8,13 @@
 
 <div class="space-y-6">
 	<!-- メインビジュアル -->
-	<div class="rounded-lg border border-border bg-card p-8">
-		<div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 1rem;">
+	<div class="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8">
+		<div class="flex items-center justify-between flex-row gap-4">
 			<!-- Client -->
 			<EndpointBox label="Client" step={handshakeStore.currentStep} />
 
 			<!-- パケットの矢印エリア -->
-			<div style="flex: 1;">
+			<div class="w-full flex-1 sm:w-auto">
 				{#key handshakeStore.currentStep}
 					<PacketArrow step={handshakeStore.currentStep} />
 				{/key}

@@ -172,6 +172,8 @@ type PacketHeader = any;
 
 ### スタイリング
 - Tailwind CSSを基本とする
+- **コンポーネント作成時は特別な理由がない限り、常にTailwind CSSでスタイル指定を行う**
+- インラインスタイル（style属性）やCSS/SCSSの使用は、Tailwindで表現できない場合のみ許可
 - 複雑なアニメーションはSvelte transitionsまたはCSS
 - カスタムプロパティ（CSS変数）は`--pf-`プレフィックス（PacketFlowの略）
 

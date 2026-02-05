@@ -25,27 +25,27 @@
 	const isVisible = $derived(packet.direction !== 'none');
 </script>
 
-<div style="position: relative; display: flex; align-items: center; justify-content: center; height: 5rem; width: 100%;">
+<div class="relative flex h-16 w-full items-center justify-center sm:h-20">
 	<!-- 接続線 -->
-	<div style="position: absolute; width: 100%; height: 2px; background: var(--border);"></div>
+	<div class="absolute h-0.5 w-full bg-border"></div>
 
 	{#if isVisible}
 		<!-- パケット -->
 		<div
-			class={packet.direction === 'right' ? 'packet-right' : 'packet-left'}
-			style="position: absolute; display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border-radius: 9999px; background: {packet.color}; color: white; font-family: monospace; font-size: 0.875rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);"
+			class="absolute flex items-center gap-2 rounded-full px-3 py-2 font-mono text-xs text-white shadow-md sm:px-4 sm:text-sm {packet.direction ===
+			'right'
+				? 'packet-right'
+				: 'packet-left'}"
+			style="background: {packet.color};"
 		>
 			<span>{packet.label}</span>
-			<span style="font-size: 1.125rem;">{packet.direction === 'right' ? '→' : '←'}</span>
+			<span class="text-base sm:text-lg">{packet.direction === 'right' ? '→' : '←'}</span>
 		</div>
 	{/if}
 
 	{#if step === 'established'}
 		<!-- 接続確立表示 -->
-		<div
-			class="pulse"
-			style="position: absolute; padding: 0.5rem 1rem; border-radius: 9999px; background: #22c55e; color: white; font-weight: 600; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);"
-		>
+		<div class="pulse absolute rounded-full bg-green-500 px-3 py-2 text-sm font-semibold text-white shadow-md sm:px-4 sm:text-base">
 			Connected!
 		</div>
 	{/if}
@@ -87,7 +87,8 @@
 	}
 
 	@keyframes pulse {
-		0%, 100% {
+		0%,
+		100% {
 			opacity: 1;
 		}
 		50% {

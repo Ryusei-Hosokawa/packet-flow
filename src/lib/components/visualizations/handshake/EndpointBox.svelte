@@ -29,11 +29,15 @@
 </script>
 
 <div
-	style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 7rem; height: 8rem; border-radius: 0.5rem; border: 2px solid {isEstablished ? '#22c55e' : 'var(--border)'}; background: {isEstablished ? 'rgba(34, 197, 94, 0.1)' : 'var(--card)'}; transition: all 0.3s;"
+	class="flex h-28 w-24 flex-col items-center justify-center rounded-lg border-2 transition-all duration-300 sm:h-32 sm:w-28 {isEstablished
+		? 'border-green-500 bg-green-500/10'
+		: 'border-border bg-card'}"
 >
-	<span style="font-size: 1.125rem; font-weight: bold;">{label}</span>
+	<span class="text-base font-bold sm:text-lg">{label}</span>
 	<span
-		style="margin-top: 0.5rem; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.75rem; font-family: monospace; background: {isEstablished ? 'rgba(34, 197, 94, 0.2)' : 'var(--muted)'}; color: {isEstablished ? '#22c55e' : 'var(--muted-foreground)'}; transition: all 0.3s;"
+		class="mt-2 rounded px-2 py-1 font-mono text-xs transition-all duration-300 {isEstablished
+			? 'bg-green-500/20 text-green-500'
+			: 'bg-muted text-muted-foreground'}"
 	>
 		{state}
 	</span>

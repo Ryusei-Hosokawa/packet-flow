@@ -65,28 +65,29 @@
 	const info = $derived(stepDetails[step]);
 </script>
 
-<div style="padding: 1.5rem; border: 1px solid var(--border); border-radius: 0.5rem; background: var(--card);">
-	<h3 style="font-size: 1.125rem; font-weight: 600;">{info.title}</h3>
-	<p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--muted-foreground);">{info.description}</p>
+<div class="rounded-lg border border-border bg-card p-4 sm:p-6">
+	<h3 class="text-base font-semibold sm:text-lg">{info.title}</h3>
+	<p class="mt-2 text-sm text-muted-foreground">{info.description}</p>
 
 	{#if info.packet}
-		<div style="margin-top: 1rem; padding: 1rem; border-radius: 0.5rem; background: var(--muted); font-family: monospace; font-size: 0.875rem;">
-			<div style="display: grid; gap: 0.5rem;">
-				<div style="display: flex; justify-content: space-between;">
-					<span style="color: var(--muted-foreground);">フラグ:</span>
-					<span>
-						SYN=<span style="color: {info.packet.flags.SYN ? '#3b82f6' : 'inherit'}; font-weight: {info.packet.flags.SYN ? 'bold' : 'normal'};">{info.packet.flags.SYN}</span>,
-						ACK=<span style="color: {info.packet.flags.ACK ? '#22c55e' : 'inherit'}; font-weight: {info.packet.flags.ACK ? 'bold' : 'normal'};">{info.packet.flags.ACK}</span>
-					</span>
-				</div>
-				<div style="display: flex; justify-content: space-between;">
-					<span style="color: var(--muted-foreground);">Seq番号:</span>
-					<span>{info.packet.seq}</span>
-				</div>
-				<div style="display: flex; justify-content: space-between;">
-					<span style="color: var(--muted-foreground);">Ack番号:</span>
-					<span>{info.packet.ack}</span>
-				</div>
+		<div class="mt-4 grid gap-2 rounded-lg bg-muted p-3 font-mono text-sm sm:p-4">
+			<div class="flex justify-between">
+				<span class="text-muted-foreground">フラグ:</span>
+				<span>
+					SYN=<span class={info.packet.flags.SYN ? 'font-bold text-blue-500' : ''}
+						>{info.packet.flags.SYN}</span
+					>, ACK=<span class={info.packet.flags.ACK ? 'font-bold text-green-500' : ''}
+						>{info.packet.flags.ACK}</span
+					>
+				</span>
+			</div>
+			<div class="flex justify-between">
+				<span class="text-muted-foreground">Seq番号:</span>
+				<span>{info.packet.seq}</span>
+			</div>
+			<div class="flex justify-between">
+				<span class="text-muted-foreground">Ack番号:</span>
+				<span>{info.packet.ack}</span>
 			</div>
 		</div>
 	{/if}

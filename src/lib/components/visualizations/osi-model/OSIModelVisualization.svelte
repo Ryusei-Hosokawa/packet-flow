@@ -9,48 +9,34 @@
 
 <div class="space-y-6">
 	<!-- モデル切り替えタブ -->
-	<div
-		style="display: flex; gap: 0.5rem; padding: 0.25rem; border-radius: 0.5rem; background: var(--muted); width: fit-content;"
-	>
+	<div class="flex w-fit flex-wrap gap-2 rounded-lg bg-muted p-1">
 		<button
 			type="button"
 			onclick={() => osiModelStore.setModel('osi')}
-			style="padding: 0.5rem 1rem; border-radius: 0.375rem; border: none; font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: all 0.2s; background: {osiModelStore.selectedModel ===
+			class="rounded-md border-none px-3 py-2 text-sm font-medium transition-all duration-200 sm:px-4 {osiModelStore.selectedModel ===
 			'osi'
-				? 'var(--background)'
-				: 'transparent'}; color: {osiModelStore.selectedModel === 'osi'
-				? 'var(--foreground)'
-				: 'var(--muted-foreground)'}; box-shadow: {osiModelStore.selectedModel === 'osi'
-				? '0 1px 3px rgba(0,0,0,0.1)'
-				: 'none'};"
+				? 'bg-background text-foreground shadow-sm'
+				: 'bg-transparent text-muted-foreground'}"
 		>
 			OSI参照モデル
 		</button>
 		<button
 			type="button"
 			onclick={() => osiModelStore.setModel('tcpip')}
-			style="padding: 0.5rem 1rem; border-radius: 0.375rem; border: none; font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: all 0.2s; background: {osiModelStore.selectedModel ===
+			class="rounded-md border-none px-3 py-2 text-sm font-medium transition-all duration-200 sm:px-4 {osiModelStore.selectedModel ===
 			'tcpip'
-				? 'var(--background)'
-				: 'transparent'}; color: {osiModelStore.selectedModel === 'tcpip'
-				? 'var(--foreground)'
-				: 'var(--muted-foreground)'}; box-shadow: {osiModelStore.selectedModel === 'tcpip'
-				? '0 1px 3px rgba(0,0,0,0.1)'
-				: 'none'};"
+				? 'bg-background text-foreground shadow-sm'
+				: 'bg-transparent text-muted-foreground'}"
 		>
 			TCP/IPモデル
 		</button>
 		<button
 			type="button"
 			onclick={() => osiModelStore.setModel('comparison')}
-			style="padding: 0.5rem 1rem; border-radius: 0.375rem; border: none; font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: all 0.2s; background: {osiModelStore.selectedModel ===
+			class="rounded-md border-none px-3 py-2 text-sm font-medium transition-all duration-200 sm:px-4 {osiModelStore.selectedModel ===
 			'comparison'
-				? 'var(--background)'
-				: 'transparent'}; color: {osiModelStore.selectedModel === 'comparison'
-				? 'var(--foreground)'
-				: 'var(--muted-foreground)'}; box-shadow: {osiModelStore.selectedModel === 'comparison'
-				? '0 1px 3px rgba(0,0,0,0.1)'
-				: 'none'};"
+				? 'bg-background text-foreground shadow-sm'
+				: 'bg-transparent text-muted-foreground'}"
 		>
 			比較表示
 		</button>
@@ -59,17 +45,13 @@
 	<!-- メインコンテンツ -->
 	{#if isComparison}
 		<!-- 比較表示モード -->
-		<div style="display: flex; flex-direction: column; gap: 1.5rem;">
+		<div class="flex flex-col gap-6">
 			<!-- 両モデル並列表示 -->
-			<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+			<div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8">
 				<!-- OSIモデル -->
-				<div
-					style="padding: 1.5rem; border: 1px solid var(--border); border-radius: 0.5rem; background: var(--card);"
-				>
-					<h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem; text-align: center;">
-						OSI参照モデル（7層）
-					</h3>
-					<div style="display: flex; flex-direction: column; gap: 0.5rem;">
+				<div class="rounded-lg border border-border bg-card p-4 sm:p-6">
+					<h3 class="mb-4 text-center text-sm font-semibold sm:text-base">OSI参照モデル（7層）</h3>
+					<div class="flex flex-col gap-2">
 						{#each OSI_LAYERS as layer}
 							<LayerBox
 								number={layer.number}
@@ -85,19 +67,13 @@
 				</div>
 
 				<!-- TCP/IPモデル -->
-				<div
-					style="padding: 1.5rem; border: 1px solid var(--border); border-radius: 0.5rem; background: var(--card);"
-				>
-					<h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem; text-align: center;">
-						TCP/IPモデル（4層）
-					</h3>
-					<div style="display: flex; flex-direction: column; gap: 0.5rem;">
+				<div class="rounded-lg border border-border bg-card p-4 sm:p-6">
+					<h3 class="mb-4 text-center text-sm font-semibold sm:text-base">TCP/IPモデル（4層）</h3>
+					<div class="flex flex-col gap-2">
 						{#each TCPIP_LAYERS as layer}
 							{@const heightMultiplier = layer.osiMapping.length}
-							<div
-								style="height: {heightMultiplier * 3.5}rem; display: flex; align-items: center;"
-							>
-								<div style="width: 100%;">
+							<div class="flex items-center" style="height: {heightMultiplier * 3.5}rem;">
+								<div class="w-full">
 									<LayerBox
 										number={layer.number}
 										name={layer.name}
@@ -122,25 +98,20 @@
 			/>
 
 			<!-- マッピング説明 -->
-			<div
-				style="padding: 1rem; border: 1px solid var(--border); border-radius: 0.5rem; background: var(--muted);"
-			>
-				<h4 style="font-size: 0.875rem; font-weight: 600; margin-bottom: 0.75rem;">
-					OSI ↔ TCP/IP マッピング
-				</h4>
-				<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem;">
+			<div class="rounded-lg border border-border bg-muted p-4">
+				<h4 class="mb-3 text-sm font-semibold">OSI ↔ TCP/IP マッピング</h4>
+				<div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
 					{#each TCPIP_LAYERS as tcpipLayer}
-						<div
-							style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 0.25rem; background: var(--background);"
-						>
+						<div class="flex items-center gap-2 rounded bg-background p-2">
 							<span
-								style="display: flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; border-radius: 9999px; background: {tcpipLayer.color}; color: white; font-size: 0.75rem; font-weight: bold;"
+								class="flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold text-white"
+								style="background: {tcpipLayer.color};"
 							>
 								{tcpipLayer.number}
 							</span>
-							<span style="font-size: 0.75rem; font-weight: 500;">{tcpipLayer.name}</span>
-							<span style="font-size: 0.75rem; color: var(--muted-foreground);">←</span>
-							<span style="font-size: 0.75rem; color: var(--muted-foreground);">
+							<span class="text-xs font-medium">{tcpipLayer.name}</span>
+							<span class="text-xs text-muted-foreground">←</span>
+							<span class="text-xs text-muted-foreground">
 								OSI {tcpipLayer.osiMapping.join(', ')}
 							</span>
 						</div>
@@ -152,25 +123,23 @@
 			<button
 				type="button"
 				onclick={() => osiModelStore.reset()}
-				style="padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 0.5rem; background: var(--background); font-size: 0.875rem; cursor: pointer; width: fit-content;"
+				class="w-fit cursor-pointer rounded-lg border border-border bg-background px-4 py-2 text-sm transition-colors hover:bg-muted"
 			>
 				選択をリセット
 			</button>
 		</div>
 	{:else}
 		<!-- 単一モデル表示モード -->
-		<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+		<div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8">
 			<!-- 左: モデル図 -->
-			<div style="display: flex; flex-direction: column; gap: 1rem;">
+			<div class="flex flex-col gap-4">
 				{#if osiModelStore.selectedModel === 'osi'}
 					<!-- OSIモデル -->
-					<div
-						style="padding: 1.5rem; border: 1px solid var(--border); border-radius: 0.5rem; background: var(--card);"
-					>
-						<h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem; text-align: center;">
+					<div class="rounded-lg border border-border bg-card p-4 sm:p-6">
+						<h3 class="mb-4 text-center text-sm font-semibold sm:text-base">
 							OSI参照モデル（7層）
 						</h3>
-						<div style="display: flex; flex-direction: column; gap: 0.5rem;">
+						<div class="flex flex-col gap-2">
 							{#each OSI_LAYERS as layer}
 								<LayerBox
 									number={layer.number}
@@ -186,13 +155,9 @@
 					</div>
 				{:else}
 					<!-- TCP/IPモデル -->
-					<div
-						style="padding: 1.5rem; border: 1px solid var(--border); border-radius: 0.5rem; background: var(--card);"
-					>
-						<h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem; text-align: center;">
-							TCP/IPモデル（4層）
-						</h3>
-						<div style="display: flex; flex-direction: column; gap: 0.5rem;">
+					<div class="rounded-lg border border-border bg-card p-4 sm:p-6">
+						<h3 class="mb-4 text-center text-sm font-semibold sm:text-base">TCP/IPモデル（4層）</h3>
+						<div class="flex flex-col gap-2">
 							{#each TCPIP_LAYERS as layer}
 								<LayerBox
 									number={layer.number}
@@ -213,7 +178,7 @@
 				<button
 					type="button"
 					onclick={() => osiModelStore.reset()}
-					style="padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 0.5rem; background: var(--background); font-size: 0.875rem; cursor: pointer;"
+					class="cursor-pointer rounded-lg border border-border bg-background px-4 py-2 text-sm transition-colors hover:bg-muted"
 				>
 					選択をリセット
 				</button>
@@ -227,13 +192,9 @@
 				/>
 
 				<!-- モデル比較の説明 -->
-				<div
-					style="margin-top: 1rem; padding: 1rem; border: 1px solid var(--border); border-radius: 0.5rem; background: var(--muted);"
-				>
-					<h4 style="font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem;">
-						OSI vs TCP/IP
-					</h4>
-					<p style="font-size: 0.75rem; color: var(--muted-foreground); line-height: 1.5;">
+				<div class="mt-4 rounded-lg border border-border bg-muted p-4">
+					<h4 class="mb-2 text-sm font-semibold">OSI vs TCP/IP</h4>
+					<p class="text-xs leading-relaxed text-muted-foreground">
 						OSI参照モデルは理論的な標準モデル（7層）で、TCP/IPモデルは実際のインターネットで使われる実用的なモデル（4層）です。
 						TCP/IPのアプリケーション層はOSIの上位3層（5-7）を、ネットワークインターフェース層は下位2層（1-2）を統合しています。
 					</p>

@@ -35,3 +35,45 @@ export interface IPHeader {
 	sourceIP: string;
 	destIP: string;
 }
+
+// パケット構造可視化用の型定義
+export type HeaderType = 'ip' | 'tcp' | 'udp';
+
+export interface HeaderField {
+	id: string;
+	name: string;
+	nameJa: string;
+	bits: number;
+	row: number; // 行番号（0から開始）
+	startBit: number; // 行内の開始ビット位置
+	description: string;
+	example: string;
+	color: string;
+}
+
+export interface HeaderDefinition {
+	type: HeaderType;
+	name: string;
+	nameJa: string;
+	totalBits: number;
+	bitsPerRow: number;
+	fields: HeaderField[];
+}
+
+// TCP vs UDP 比較用の型定義
+export type ProtocolType = 'tcp' | 'udp';
+
+export interface ComparisonItem {
+	category: string;
+	tcp: string;
+	udp: string;
+	description: string;
+}
+
+export interface UseCaseItem {
+	protocol: ProtocolType;
+	name: string;
+	nameJa: string;
+	description: string;
+	icon: string;
+}
