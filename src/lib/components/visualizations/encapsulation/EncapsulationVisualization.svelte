@@ -4,6 +4,7 @@
 		ENCAPSULATION_LAYERS
 	} from '$lib/stores/encapsulationStore.svelte';
 	import DataBlock from './DataBlock.svelte';
+	import Term from '$lib/components/ui/Term.svelte';
 
 	const speeds = [0.5, 1, 2] as const;
 </script>
@@ -126,9 +127,13 @@
 							: '非カプセル化完了'}
 					</h4>
 					<p class="text-xs leading-relaxed text-muted-foreground">
-						{encapsulationStore.direction === 'encapsulation'
-							? 'すべての層でヘッダが追加され、物理的な信号として送信準備が整いました。'
-							: 'すべてのヘッダが取り除かれ、元のアプリケーションデータが取り出されました。'}
+						{#if encapsulationStore.direction === 'encapsulation'}
+							すべての層でヘッダが追加され、<Term id="frame">フレーム</Term
+							>として物理的な信号で送信準備が整いました。
+						{:else}
+							すべてのヘッダが取り除かれ（<Term id="decapsulation">非カプセル化</Term
+							>）、元のアプリケーションデータが取り出されました。
+						{/if}
 					</p>
 				{:else if encapsulationStore.currentLayerData}
 					<h4 class="mb-2 text-sm font-semibold">
@@ -138,6 +143,40 @@
 						{encapsulationStore.currentLayerData.description}
 					</p>
 				{/if}
+			</div>
+
+			<!-- 学習ポイント -->
+			<div class="rounded-lg border border-dashed border-border bg-background p-3">
+				<div class="mb-2 text-xs font-medium text-foreground">💡 学習ポイント</div>
+				<p class="text-xs leading-relaxed text-muted-foreground">
+					{#if encapsulationStore.currentStep === 'application'}
+						アプリケーション層では、ユーザーが入力したデータがそのまま下位層に渡されます。<Term
+							id="protocol">プロトコル</Term
+						>によってはこの層でデータの暗号化（TLSなど）が行われます。
+					{:else if encapsulationStore.currentStep === 'transport'}
+						トランスポート層では<Term id="port">ポート番号</Term>、<Term id="sequence-number"
+							>シーケンス番号</Term
+						>などを含むヘッダが追加されます。TCPなら<Term id="segment">セグメント</Term
+						>、UDPなら<Term id="datagram">データグラム</Term>と呼ばれます。
+					{:else if encapsulationStore.currentStep === 'network'}
+						ネットワーク層では送信元/宛先<Term id="ip-address">IPアドレス</Term>、<Term id="ttl"
+							>TTL</Term
+						>などを含むIPヘッダが追加され、<Term id="packet">パケット</Term>になります。
+					{:else if encapsulationStore.currentStep === 'datalink'}
+						データリンク層では<Term id="mac-address">MACアドレス</Term
+						>を含むイーサネットヘッダとエラーチェック用のトレーラが追加され、<Term id="frame"
+							>フレーム</Term
+						>になります。
+					{:else if encapsulationStore.currentStep === 'complete'}
+						<Term id="encapsulation">カプセル化</Term>と<Term id="decapsulation">非カプセル化</Term
+						>により、各層は自分の役割に集中でき、他の層の詳細を知る必要がありません。これを「層の独立性」と呼びます。
+					{:else}
+						<Term id="encapsulation">カプセル化</Term
+						>では、上位層から受け取ったデータに各層のヘッダを付け加えます。受信側では逆に、各層でヘッダを取り除いて（<Term
+							id="decapsulation">非カプセル化</Term
+						>）上位層にデータを渡します。
+					{/if}
+				</p>
 			</div>
 		</div>
 	</div>

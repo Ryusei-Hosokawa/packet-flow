@@ -4,6 +4,7 @@
 		COMPARISON_DATA,
 		USE_CASES
 	} from '$lib/stores/comparisonStore.svelte';
+	import Term from '$lib/components/ui/Term.svelte';
 </script>
 
 <div class="space-y-6 sm:space-y-8">
@@ -31,7 +32,9 @@
 				</div>
 			</div>
 			<p class="text-xs leading-relaxed text-muted-foreground sm:text-sm">
-				接続確立、確認応答、再送制御により確実にデータを届ける。
+				<Term id="three-way-handshake">3ウェイハンドシェイク</Term>による接続確立、<Term
+					id="ack">確認応答</Term
+				>、<Term id="retransmission">再送制御</Term>により確実にデータを届ける。
 			</p>
 		</button>
 
@@ -57,7 +60,8 @@
 				</div>
 			</div>
 			<p class="text-xs leading-relaxed text-muted-foreground sm:text-sm">
-				接続確立なしで高速にデータを送信。リアルタイム性が重要な用途に最適。
+				<Term id="connectionless">コネクションレス</Term
+				>で高速にデータを送信。リアルタイム性が重要な用途に最適。
 			</p>
 		</button>
 	</div>
@@ -196,7 +200,7 @@
 				<h4 class="mb-2 font-semibold">TCPを選ぶ場合</h4>
 				<ul class="list-disc space-y-1 pl-5 text-xs leading-relaxed text-muted-foreground sm:text-sm">
 					<li>データの完全性が重要</li>
-					<li>順序通りに届く必要がある</li>
+					<li><Term id="sequence-number">シーケンス番号</Term>による順序制御が必要</li>
 					<li>多少の遅延は許容できる</li>
 				</ul>
 			</div>
@@ -204,10 +208,55 @@
 				<h4 class="mb-2 font-semibold">UDPを選ぶ場合</h4>
 				<ul class="list-disc space-y-1 pl-5 text-xs leading-relaxed text-muted-foreground sm:text-sm">
 					<li>リアルタイム性が重要</li>
-					<li>多少のデータ欠落は許容できる</li>
-					<li>ブロードキャストが必要</li>
+					<li>多少の<Term id="datagram">データグラム</Term>欠落は許容できる</li>
+					<li><Term id="broadcast">ブロードキャスト</Term>が必要</li>
 				</ul>
 			</div>
 		</div>
+	</div>
+
+	<!-- 学習ポイント -->
+	<div class="rounded-lg border border-dashed border-border bg-background p-3">
+		<div class="mb-2 text-xs font-medium text-foreground">💡 学習ポイント</div>
+		<p class="text-xs leading-relaxed text-muted-foreground">
+			{#if comparisonStore.selectedProtocol === 'tcp'}
+				TCPは<Term id="connection-oriented">コネクション型</Term
+				>プロトコルで、<Term id="three-way-handshake">3ウェイハンドシェイク</Term
+				>で接続を確立します。<Term id="sequence-number">シーケンス番号</Term>と<Term id="ack-number"
+					>ACK番号</Term
+				>を使ってデータの順序と到達を保証し、<Term id="flow-control">フロー制御</Term
+				>や<Term id="congestion-control">輻輳制御</Term>も行います。
+			{:else if comparisonStore.selectedProtocol === 'udp'}
+				UDPは<Term id="connectionless">コネクションレス型</Term
+				>プロトコルで、接続確立なしにすぐデータを送信できます。<Term id="checksum">チェックサム</Term
+				>による最低限のエラー検出はありますが、<Term id="retransmission">再送</Term
+				>や順序制御は行いません。そのためオーバーヘッドが少なく高速です。
+			{:else if comparisonStore.highlightedCategory === '接続方式'}
+				TCPの<Term id="connection-oriented">コネクション型</Term
+				>通信は、通話のように「もしもし」「はい」とやり取りしてから会話を始めます。UDPの<Term
+					id="connectionless">コネクションレス型</Term
+				>通信は、郵便のように一方的に送りつけます。
+			{:else if comparisonStore.highlightedCategory === '信頼性'}
+				TCPは<Term id="ack">確認応答</Term>と<Term id="retransmission">再送制御</Term
+				>でデータの到達を保証します。UDPは「送りっぱなし」で、<Term id="packet">パケット</Term
+				>が届いたかどうかは上位層のアプリケーションで対応します。
+			{:else if comparisonStore.highlightedCategory === '順序制御'}
+				TCPは<Term id="sequence-number">シーケンス番号</Term
+				>を使って送信順にデータを並べ替えます。ネットワーク経路の違いで順番が入れ替わっても、受信側で正しい順序に復元できます。
+			{:else if comparisonStore.highlightedCategory === 'フロー制御'}
+				TCPの<Term id="flow-control">フロー制御</Term>は、<Term id="window-size"
+					>ウィンドウサイズ</Term
+				>を使って受信側の処理能力に合わせてデータ送信量を調整します。受信バッファが溢れるのを防ぎます。
+			{:else if comparisonStore.highlightedCategory === '速度'}
+				UDPは接続確立や確認応答のオーバーヘッドがないため高速です。<Term id="segment"
+					>セグメント</Term
+				>あたりのヘッダも8バイトとTCPの20バイト以上に比べて小さくなっています。
+			{:else}
+				TCPとUDPはどちらも<Term id="transport-layer">トランスポート層</Term>の<Term id="protocol"
+					>プロトコル</Term
+				>です。<Term id="port">ポート番号</Term
+				>を使ってアプリケーションを識別する点は共通ですが、信頼性と速度のトレードオフが異なります。
+			{/if}
+		</p>
 	</div>
 </div>
