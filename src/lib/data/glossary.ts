@@ -424,6 +424,25 @@ export const glossary: Record<string, GlossaryTerm> = {
 		related: ['ip-address'],
 		category: 'general'
 	},
+	icmp: {
+		term: 'ICMP',
+		fullName: 'Internet Control Message Protocol',
+		short: 'ネットワーク診断用のプロトコル',
+		description:
+			'ネットワークの状態を診断・通知するためのプロトコルです。pingコマンドはICMPの「Echo Request」と「Echo Reply」メッセージを使ってホストへの到達性を確認します。また、TTLが0になったときの通知や、宛先に到達できない場合の通知にも使われます。',
+		related: ['packet', 'ttl', 'router'],
+		category: 'ip'
+	},
+	'packet-loss': {
+		term: 'パケットロス',
+		termJa: 'パケットロス',
+		fullName: 'Packet Loss',
+		short: '送信パケットが宛先に届かない現象',
+		description:
+			'送信したパケットが宛先に届かずに失われる現象です。ネットワークの混雑、機器の処理能力不足、物理的な接続問題などが原因で発生します。パケットロス率が高いと、再送が増えて通信速度が低下したり、リアルタイム通信（VoIP、ビデオ通話など）の品質が悪化します。',
+		related: ['congestion-control', 'retransmission'],
+		category: 'general'
+	},
 	broadcast: {
 		term: 'ブロードキャスト',
 		termJa: 'ブロードキャスト',

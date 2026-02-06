@@ -25,9 +25,8 @@
 		</div>
 	</div>
 
-	<!-- コントロールバー -->
-	<ControlBar />
-
 	<!-- パケット情報パネル -->
 	<PacketInfo step={handshakeStore.currentStep} />
+	<!-- コントロールバー -->
+	<ControlBar />
 </div>

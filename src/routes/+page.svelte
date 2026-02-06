@@ -37,7 +37,7 @@
 	<title>PacketFlow - TCP/IPプロトコル可視化ツール</title>
 </svelte:head>
 
-<div class="mx-auto max-w-4xl px-4 pb-12 sm:px-6">
+<div class="mx-auto max-w-6xl px-4 pb-12 sm:px-6">
 	<!-- ヒーローセクション -->
 	<section class="py-8 text-center sm:py-12 md:py-16">
 		<h1 class="mb-2 text-3xl font-extrabold text-foreground sm:text-4xl md:text-5xl">
@@ -63,7 +63,7 @@
 					class="group flex items-center gap-3 rounded-xl border border-border bg-card p-4 transition-all duration-200 hover:translate-x-1 hover:border-foreground sm:gap-4 sm:p-5"
 				>
 					<div
-						class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-muted text-sm font-semibold text-foreground transition-colors group-hover:bg-foreground group-hover:text-background sm:h-10 sm:w-10 sm:text-base"
+						class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-muted text-sm font-semibold text-foreground group-hover:bg-foreground group-hover:text-background sm:h-10 sm:w-10 sm:text-base transition-all duration-200"
 					>
 						{index + 1}
 					</div>
