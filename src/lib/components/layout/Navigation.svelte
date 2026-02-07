@@ -10,7 +10,9 @@
 		{ href: '/encapsulation', label: 'Encapsulation' },
 		{ href: '/tcp-vs-udp', label: 'TCP/UDP' },
 		{ href: '/tools/ping', label: 'Ping' },
-		{ href: '/tools/traceroute', label: 'Traceroute' }
+		{ href: '/tools/traceroute', label: 'Traceroute' },
+		{ href: '/tools/dns', label: 'DNS' },
+		{ href: '/tools/network-info', label: 'Network' }
 	];
 
 	let isMenuOpen = $state(false);

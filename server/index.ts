@@ -7,14 +7,18 @@
 
 import { executePing } from './commands/ping';
 import { executeTraceroute } from './commands/traceroute';
+import { executeDNS } from './commands/dns';
+import { executeNetworkInfo } from './commands/network-info';
 
 // WebSocket メッセージの型定義
 interface WSMessage {
-	type: 'ping' | 'traceroute' | 'dns';
-	payload: {
-		host: string;
+	type: 'ping' | 'traceroute' | 'dns' | 'network-info';
+	payload?: {
+		host?: string;
+		domain?: string;
 		count?: number;
 		maxHops?: number;
+		recordType?: string;
 	};
 }
 
@@ -57,11 +61,25 @@ const server = Bun.serve({
 
 				switch (data.type) {
 					case 'ping':
-						await executePing(ws, data.payload.host, data.payload.count ?? 4);
+						if (data.payload?.host) {
+							await executePing(ws, data.payload.host, data.payload.count ?? 4);
+						}
 						break;
 
 					case 'traceroute':
-						await executeTraceroute(ws, data.payload.host, data.payload.maxHops ?? 30);
+						if (data.payload?.host) {
+							await executeTraceroute(ws, data.payload.host, data.payload.maxHops ?? 30);
+						}
+						break;
+
+					case 'dns':
+						if (data.payload?.domain) {
+							await executeDNS(ws, data.payload.domain, data.payload.recordType ?? 'A');
+						}
+						break;
+
+					case 'network-info':
+						await executeNetworkInfo(ws);
 						break;
 
 					default:
