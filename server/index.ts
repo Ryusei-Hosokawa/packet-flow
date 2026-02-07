@@ -12,14 +12,45 @@ import { executeNetworkInfo } from './commands/network-info';
 
 // WebSocket メッセージの型定義
 interface WSMessage {
-	type: 'ping' | 'traceroute' | 'dns' | 'network-info';
+	type: 'ping' | 'traceroute' | 'dns' | 'network-info' | 'echo' | 'broadcast';
 	payload?: {
 		host?: string;
 		domain?: string;
 		count?: number;
 		maxHops?: number;
 		recordType?: string;
+		message?: string;
+		timestamp?: number; // クライアントからのタイムスタンプ
 	};
+}
+
+// 接続中のクライアント管理
+const clients = new Set<WebSocket>();
+
+// 全クライアントにブロードキャスト
+function broadcastToAll(message: object) {
+	const data = JSON.stringify(message);
+	for (const client of clients) {
+		try {
+			(client as unknown as { send: (data: string) => void }).send(data);
+		} catch {
+			// 送信失敗したクライアントは無視
+		}
+	}
+}
+
+// 送信者以外にブロードキャスト
+function broadcastToOthers(sender: WebSocket, message: object) {
+	const data = JSON.stringify(message);
+	for (const client of clients) {
+		if (client !== sender) {
+			try {
+				(client as unknown as { send: (data: string) => void }).send(data);
+			} catch {
+				// 送信失敗したクライアントは無視
+			}
+		}
+	}
 }
 
 // サーバー設定
@@ -50,7 +81,17 @@ const server = Bun.serve({
 		// クライアントが接続したとき
 		open(ws) {
 			console.log('Client connected');
-			ws.send(JSON.stringify({ type: 'connected', message: 'Welcome to PacketFlow Server' }));
+			clients.add(ws as unknown as WebSocket);
+			ws.send(JSON.stringify({
+				type: 'connected',
+				message: 'Welcome to PacketFlow Server',
+				clientCount: clients.size
+			}));
+			// 他のクライアントに通知
+			broadcastToOthers(ws as unknown as WebSocket, {
+				type: 'client-joined',
+				clientCount: clients.size
+			});
 		},
 
 		// メッセージを受信したとき
@@ -82,6 +123,25 @@ const server = Bun.serve({
 						await executeNetworkInfo(ws);
 						break;
 
+					case 'echo':
+						// エコー: 送信者に即座に返す（クライアントのタイムスタンプをそのまま返す）
+						ws.send(JSON.stringify({
+							type: 'echo-response',
+							timestamp: data.payload?.timestamp, // クライアントのタイムスタンプをエコー
+							originalMessage: data.payload?.message
+						}));
+						break;
+
+					case 'broadcast':
+						// ブロードキャスト: 全クライアントに送信
+						broadcastToAll({
+							type: 'broadcast-message',
+							timestamp: Date.now(),
+							message: data.payload?.message,
+							clientCount: clients.size
+						});
+						break;
+
 					default:
 						ws.send(JSON.stringify({ type: 'error', message: `Unknown command: ${data.type}` }));
 				}
@@ -94,6 +154,12 @@ const server = Bun.serve({
 		// クライアントが切断したとき
 		close(ws) {
 			console.log('Client disconnected');
+			clients.delete(ws as unknown as WebSocket);
+			// 他のクライアントに通知
+			broadcastToAll({
+				type: 'client-left',
+				clientCount: clients.size
+			});
 		}
 	}
 });

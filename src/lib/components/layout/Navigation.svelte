@@ -9,6 +9,10 @@
 		{ href: '/packet-structure', label: 'Packet' },
 		{ href: '/encapsulation', label: 'Encapsulation' },
 		{ href: '/tcp-vs-udp', label: 'TCP/UDP' },
+		{ href: '/congestion-control', label: 'Congestion' },
+		{ href: '/packet-loss', label: 'Packet Loss' },
+		{ href: '/network-topology', label: 'Topology' },
+		{ href: '/websocket-demo', label: 'WebSocket' },
 		{ href: '/tools/ping', label: 'Ping' },
 		{ href: '/tools/traceroute', label: 'Traceroute' },
 		{ href: '/tools/dns', label: 'DNS' },
@@ -50,7 +54,7 @@
 {/if}
 
 <!-- フローティングナビゲーション -->
-<nav class="fixed left-1/2 top-4 z-50 mx-auto my-4 w-[90%] max-w-md -translate-x-1/2">
+<nav class="fixed left-1/2 top-4 z-50 mx-auto my-4 w-[calc(100%-calc(1.5rem*2))] max-w-6xl -translate-x-1/2">
 	<div
 		class="overflow-hidden rounded-[20px] border border-border bg-card shadow-lg backdrop-blur-sm transition-all duration-300"
 	>

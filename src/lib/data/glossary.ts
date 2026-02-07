@@ -176,7 +176,27 @@ export const glossary: Record<string, GlossaryTerm> = {
 		short: '送信量を徐々に増やすアルゴリズム',
 		description:
 			'TCP接続開始時に、送信速度を低く始めて徐々に増やしていくアルゴリズムです。ネットワークの容量が分からない状態で大量のデータを送ると混雑を引き起こすため、まず少量から始めて安全な速度を探ります。',
-		related: ['congestion-control'],
+		related: ['congestion-control', 'cwnd', 'ssthresh'],
+		category: 'tcp'
+	},
+	cwnd: {
+		term: 'cwnd',
+		termJa: '輻輳ウィンドウ',
+		fullName: 'Congestion Window',
+		short: '送信可能なデータ量を制限するウィンドウ',
+		description:
+			'ネットワークの輻輳状態に応じて送信できるデータ量を制限するウィンドウです。スロースタート時は指数的に増加し、輻輳回避時は線形的に増加します。パケットロスが発生すると減少して、ネットワークの混雑を緩和します。',
+		related: ['ssthresh', 'slow-start', 'congestion-control'],
+		category: 'tcp'
+	},
+	ssthresh: {
+		term: 'ssthresh',
+		termJa: 'スロースタート閾値',
+		fullName: 'Slow Start Threshold',
+		short: 'スロースタートから輻輳回避への切り替え点',
+		description:
+			'cwndがこの閾値に達すると、スロースタート（指数的増加）から輻輳回避（線形的増加）に切り替わります。パケットロスが発生すると、この値は現在のcwndの半分に設定され、次回のスロースタートの上限となります。',
+		related: ['cwnd', 'slow-start', 'congestion-control'],
 		category: 'tcp'
 	},
 	retransmission: {
