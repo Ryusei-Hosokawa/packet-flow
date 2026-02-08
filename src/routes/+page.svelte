@@ -1,5 +1,5 @@
 <script lang="ts">
-	const topics = [
+	const phase1Topics = [
 		{
 			title: '3-Way Handshake',
 			titleJa: '3ウェイハンドシェイク',
@@ -31,6 +31,60 @@
 			href: '/tcp-vs-udp'
 		}
 	];
+
+	const phase2Topics = [
+		{
+			title: 'Ping',
+			titleJa: 'Ping実行',
+			description: 'リアルタイムでpingを実行し、応答時間やパケットロスを確認',
+			href: '/tools/ping'
+		},
+		{
+			title: 'Traceroute',
+			titleJa: 'Traceroute',
+			description: '目的地までの経路をホップごとに可視化',
+			href: '/tools/traceroute'
+		},
+		{
+			title: 'DNS Lookup',
+			titleJa: 'DNS解決',
+			description: 'ドメイン名からIPアドレスへの解決過程を可視化',
+			href: '/tools/dns'
+		},
+		{
+			title: 'Network Info',
+			titleJa: 'ネットワーク情報',
+			description: '自分のネットワーク環境（IP、インターフェース）を確認',
+			href: '/tools/network-info'
+		}
+	];
+
+	const phase3Topics = [
+		{
+			title: 'Congestion Control',
+			titleJa: '輻輳制御',
+			description: 'スロースタートや輻輳回避アルゴリズムをアニメーションで解説',
+			href: '/congestion-control'
+		},
+		{
+			title: 'Packet Loss Simulation',
+			titleJa: 'パケットロス',
+			description: 'パケットロス発生時の再送処理をシミュレーション',
+			href: '/packet-loss'
+		},
+		{
+			title: 'Network Topology',
+			titleJa: 'ネットワーク構成',
+			description: 'ネットワークトポロジーをD3.jsで可視化',
+			href: '/network-topology'
+		},
+		{
+			title: 'WebSocket Demo',
+			titleJa: 'WebSocketデモ',
+			description: 'リアルタイム双方向通信の仕組みを体験',
+			href: '/websocket-demo'
+		}
+	];
 </script>
 
 <svelte:head>
@@ -51,13 +105,79 @@
 		</p>
 	</section>
 
-	<!-- トピックグリッド -->
+	<!-- Phase 1: 教育コンテンツ -->
 	<section class="mb-12">
 		<h2 class="mb-1 text-xl font-semibold sm:text-2xl">Learning Topics</h2>
 		<p class="mb-6 text-sm text-muted-foreground">Phase 1: フロントエンド教育コンテンツ</p>
 
 		<div class="flex flex-col gap-3">
-			{#each topics as topic, index}
+			{#each phase1Topics as topic, index}
+				<a
+					href={topic.href}
+					class="group flex items-center gap-3 rounded-xl border border-border bg-card p-4 transition-all duration-200 hover:translate-x-1 hover:border-foreground sm:gap-4 sm:p-5"
+				>
+					<div
+						class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-muted text-sm font-semibold text-foreground group-hover:bg-foreground group-hover:text-background sm:h-10 sm:w-10 sm:text-base transition-all duration-200"
+					>
+						{index + 1}
+					</div>
+					<div class="min-w-0 flex-1">
+						<h3 class="text-base font-semibold text-foreground sm:text-lg">{topic.title}</h3>
+						<p class="text-xs text-muted-foreground">{topic.titleJa}</p>
+						<p class="mt-1 text-sm leading-snug text-muted-foreground">{topic.description}</p>
+					</div>
+					<div
+						class="shrink-0 text-muted-foreground transition-all duration-200 group-hover:translate-x-1 group-hover:text-foreground"
+					>
+						<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M5 10h10M11 6l4 4-4 4" />
+						</svg>
+					</div>
+				</a>
+			{/each}
+		</div>
+	</section>
+
+	<!-- Phase 2: ネットワークツール -->
+	<section class="mb-12">
+		<h2 class="mb-1 text-xl font-semibold sm:text-2xl">Network Tools</h2>
+		<p class="mb-6 text-sm text-muted-foreground">Phase 2: バックエンド連携（実データ取得）</p>
+
+		<div class="flex flex-col gap-3">
+			{#each phase2Topics as topic, index}
+				<a
+					href={topic.href}
+					class="group flex items-center gap-3 rounded-xl border border-border bg-card p-4 transition-all duration-200 hover:translate-x-1 hover:border-foreground sm:gap-4 sm:p-5"
+				>
+					<div
+						class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-muted text-sm font-semibold text-foreground group-hover:bg-foreground group-hover:text-background sm:h-10 sm:w-10 sm:text-base transition-all duration-200"
+					>
+						{index + 1}
+					</div>
+					<div class="min-w-0 flex-1">
+						<h3 class="text-base font-semibold text-foreground sm:text-lg">{topic.title}</h3>
+						<p class="text-xs text-muted-foreground">{topic.titleJa}</p>
+						<p class="mt-1 text-sm leading-snug text-muted-foreground">{topic.description}</p>
+					</div>
+					<div
+						class="shrink-0 text-muted-foreground transition-all duration-200 group-hover:translate-x-1 group-hover:text-foreground"
+					>
+						<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M5 10h10M11 6l4 4-4 4" />
+						</svg>
+					</div>
+				</a>
+			{/each}
+		</div>
+	</section>
+
+	<!-- Phase 3: 発展機能 -->
+	<section class="mb-12">
+		<h2 class="mb-1 text-xl font-semibold sm:text-2xl">Advanced Topics</h2>
+		<p class="mb-6 text-sm text-muted-foreground">Phase 3: 発展機能</p>
+
+		<div class="flex flex-col gap-3">
+			{#each phase3Topics as topic, index}
 				<a
 					href={topic.href}
 					class="group flex items-center gap-3 rounded-xl border border-border bg-card p-4 transition-all duration-200 hover:translate-x-1 hover:border-foreground sm:gap-4 sm:p-5"
