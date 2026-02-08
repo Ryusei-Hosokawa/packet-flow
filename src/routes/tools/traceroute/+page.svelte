@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import Term from '$lib/components/ui/Term.svelte';
+	import PageLayout from '$lib/components/layout/PageLayout.svelte';
 
 	// 状態管理
 	let host = $state('google.com');
@@ -163,12 +164,11 @@
 	<title>Traceroute ツール - PacketFlow</title>
 </svelte:head>
 
-<div class="container mx-auto max-w-4xl px-4 py-8">
-	<h1 class="mb-2 text-2xl font-bold sm:text-3xl">Traceroute ツール</h1>
-	<p class="mb-6 text-muted-foreground">
+<PageLayout title="Traceroute ツール">
+	{#snippet description()}
 		<Term id="packet">パケット</Term>が宛先に到達するまでの経路（<Term id="hop">ホップ</Term
 		>）を可視化します
-	</p>
+	{/snippet}
 
 	<!-- 接続状態 -->
 	<div class="mb-6 flex items-center gap-2">
@@ -403,4 +403,4 @@
 			</p>
 		</div>
 	</div>
-</div>
+</PageLayout>

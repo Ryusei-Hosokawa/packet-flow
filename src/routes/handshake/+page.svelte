@@ -7,6 +7,9 @@
 	<title>3-Way Handshake | PacketFlow</title>
 </svelte:head>
 
-<PageLayout title="3-Way Handshake" subtitle="TCP接続確立の3ウェイハンドシェイクをアニメーションで学ぶ">
+<PageLayout title="3-Way Handshake">
+	{#snippet description()}
+		TCP接続確立の3ウェイハンドシェイクをアニメーションで学ぶ
+	{/snippet}
 	<HandshakeAnimation />
 </PageLayout>

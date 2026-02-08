@@ -1,19 +1,19 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
+
 	interface Props {
 		title: string;
-		subtitle: string;
+		description: Snippet;
+		children: Snippet;
 	}
 
-	let { title, subtitle, children } = $props<Props & { children: any }>();
+	let { title, description, children }: Props = $props();
 </script>
 
-<div class="mx-auto max-w-4xl px-4 pb-12 sm:px-6">
-	<header class="mb-8 border-b border-border py-6 sm:py-8">
-		<h1 class="mb-2 text-2xl font-bold sm:text-3xl">{title}</h1>
-		<p class="text-sm text-muted-foreground sm:text-base">{subtitle}</p>
-	</header>
-
-	<main>
-		{@render children()}
-	</main>
+<div class="py-8">
+	<h1 class="mb-2 text-2xl font-bold sm:text-3xl">{title}</h1>
+	<p class="mb-6 text-muted-foreground">
+		{@render description()}
+	</p>
+	{@render children()}
 </div>

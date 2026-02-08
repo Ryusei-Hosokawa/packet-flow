@@ -7,6 +7,7 @@
 		PacketLossLog
 	} from '$lib/components/visualizations/packet-loss';
 	import Term from '$lib/components/ui/Term.svelte';
+	import PageLayout from '$lib/components/layout/PageLayout.svelte';
 
 	onMount(() => {
 		packetLossStore.init();
@@ -21,11 +22,10 @@
 	<title>パケットロスシミュレーション - PacketFlow</title>
 </svelte:head>
 
-<div class="container mx-auto w-full px-4 py-8">
-	<h1 class="mb-2 text-2xl font-bold sm:text-3xl">パケットロスシミュレーション</h1>
-	<p class="mb-6 text-muted-foreground">
+<PageLayout title="パケットロスシミュレーション">
+	{#snippet description()}
 		パケットの送信、損失、<Term id="retransmission">再送</Term>の仕組みを視覚的に理解しましょう
-	</p>
+	{/snippet}
 
 	<!-- 可視化エリア -->
 	<div class="mb-6 rounded-lg border border-border bg-card p-4 sm:p-6">
@@ -143,4 +143,4 @@
 			</p>
 		</div>
 	</div>
-</div>
+</PageLayout>

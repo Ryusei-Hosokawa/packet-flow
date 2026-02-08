@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import Term from '$lib/components/ui/Term.svelte';
+	import PageLayout from '$lib/components/layout/PageLayout.svelte';
 
 	// 状態管理
 	let host = $state('8.8.8.8');
@@ -157,12 +158,11 @@
 	<title>Ping ツール - PacketFlow</title>
 </svelte:head>
 
-<div class="container mx-auto max-w-4xl px-4 py-8">
-	<h1 class="mb-2 text-2xl font-bold sm:text-3xl">Ping ツール</h1>
-	<p class="mb-6 text-muted-foreground">
+<PageLayout title="Ping ツール">
+	{#snippet description()}
 		<Term id="icmp">ICMP</Term>を使用してホストへの到達性と<Term id="rtt">RTT</Term
 		>（往復時間）を測定します
-	</p>
+	{/snippet}
 
 	<!-- 接続状態 -->
 	<div class="mb-6 flex items-center gap-2">
@@ -341,4 +341,4 @@
 			</p>
 		</div>
 	</div>
-</div>
+</PageLayout>

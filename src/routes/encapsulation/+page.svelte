@@ -7,9 +7,9 @@
 	<title>Encapsulation | PacketFlow</title>
 </svelte:head>
 
-<PageLayout
-	title="Encapsulation"
-	subtitle="データが各層でヘッダを付与される過程をアニメーションで学ぶ"
->
+<PageLayout title="Encapsulation">
+	{#snippet description()}
+		データが各層でヘッダを付与される過程をアニメーションで学ぶ
+	{/snippet}
 	<EncapsulationVisualization />
 </PageLayout>

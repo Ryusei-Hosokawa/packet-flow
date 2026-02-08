@@ -7,9 +7,9 @@
 	<title>OSI / TCP-IP Model | PacketFlow</title>
 </svelte:head>
 
-<PageLayout
-	title="OSI / TCP-IP Model"
-	subtitle="ネットワーク通信の階層モデルをインタラクティブに学ぶ"
->
+<PageLayout title="OSI / TCP-IP Model">
+	{#snippet description()}
+		ネットワーク通信の階層モデルをインタラクティブに学ぶ
+	{/snippet}
 	<OSIModelVisualization />
 </PageLayout>

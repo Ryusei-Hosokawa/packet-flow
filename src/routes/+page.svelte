@@ -91,7 +91,7 @@
 	<title>PacketFlow - TCP/IPプロトコル可視化ツール</title>
 </svelte:head>
 
-<div class="mx-auto w-full px-4 pb-12 sm:px-6">
+<div class="mx-auto w-full pb-12">
 	<!-- ヒーローセクション -->
 	<section class="py-8 text-center sm:py-12 md:py-16">
 		<h1 class="mb-2 text-3xl font-extrabold text-foreground sm:text-4xl md:text-5xl">

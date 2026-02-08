@@ -7,9 +7,9 @@
 	<title>TCP vs UDP | PacketFlow</title>
 </svelte:head>
 
-<PageLayout
-	title="TCP vs UDP"
-	subtitle="2つのトランスポート層プロトコルの違いを比較して学ぶ"
->
+<PageLayout title="TCP vs UDP">
+	{#snippet description()}
+		2つのトランスポート層プロトコルの違いを比較して学ぶ
+	{/snippet}
 	<ComparisonVisualization />
 </PageLayout>

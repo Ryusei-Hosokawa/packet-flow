@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import Term from '$lib/components/ui/Term.svelte';
+	import PageLayout from '$lib/components/layout/PageLayout.svelte';
 
 	// 状態管理
 	let isConnected = $state(false);
@@ -161,11 +162,10 @@
 	<title>WebSocket デモ - PacketFlow</title>
 </svelte:head>
 
-<div class="mx-auto w-full py-8">
-	<h1 class="mb-2 text-2xl font-bold sm:text-3xl">WebSocket リアルタイム通信デモ</h1>
-	<p class="mb-6 text-muted-foreground">
+<PageLayout title="WebSocket リアルタイム通信デモ">
+	{#snippet description()}
 		WebSocketによる双方向リアルタイム通信を体験しましょう
-	</p>
+	{/snippet}
 
 	<!-- 接続状態パネル -->
 	<div class="mb-6 rounded-lg border border-border bg-card p-4">
@@ -348,4 +348,4 @@
 			</p>
 		</div>
 	</div>
-</div>
+</PageLayout>

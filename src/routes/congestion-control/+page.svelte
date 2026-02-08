@@ -3,6 +3,7 @@
 	import { congestionStore } from '$lib/stores/congestionStore.svelte';
 	import { CongestionGraph, CongestionControls, CongestionInfo } from '$lib/components/visualizations/congestion';
 	import Term from '$lib/components/ui/Term.svelte';
+	import PageLayout from '$lib/components/layout/PageLayout.svelte';
 
 	onMount(() => {
 		// ページ読み込み時に初期化
@@ -14,11 +15,10 @@
 	<title>輻輳制御シミュレーション - PacketFlow</title>
 </svelte:head>
 
-<div class="container mx-auto w-full px-4 py-8">
-	<h1 class="mb-2 text-2xl font-bold sm:text-3xl">TCP 輻輳制御シミュレーション</h1>
-	<p class="mb-6 text-muted-foreground">
+<PageLayout title="TCP 輻輳制御シミュレーション">
+	{#snippet description()}
 		<Term id="congestion-control">輻輳制御</Term>アルゴリズムの動作を視覚的に理解しましょう
-	</p>
+	{/snippet}
 
 	<!-- グラフエリア -->
 	<div class="mb-6 rounded-lg border border-border bg-card p-4 sm:p-6">
@@ -110,4 +110,4 @@
 			</p>
 		</div>
 	</div>
-</div>
+</PageLayout>

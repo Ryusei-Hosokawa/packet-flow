@@ -3,6 +3,7 @@
 	import { topologyStore } from '$lib/stores/topologyStore.svelte';
 	import { TopologyGraph, NodeDetails } from '$lib/components/visualizations/topology';
 	import Term from '$lib/components/ui/Term.svelte';
+	import PageLayout from '$lib/components/layout/PageLayout.svelte';
 
 	onMount(() => {
 		topologyStore.loadPreset('simple');
@@ -18,11 +19,10 @@
 	<title>ネットワークトポロジー - PacketFlow</title>
 </svelte:head>
 
-<div class="container mx-auto w-full px-4 py-8">
-	<h1 class="mb-2 text-2xl font-bold sm:text-3xl">ネットワークトポロジー可視化</h1>
-	<p class="mb-6 text-muted-foreground">
+<PageLayout title="ネットワークトポロジー可視化">
+	{#snippet description()}
 		ネットワーク構成を視覚的に確認し、パケットの流れをシミュレートします
-	</p>
+	{/snippet}
 
 	<!-- コントロールパネル -->
 	<div class="mb-6 flex flex-wrap items-center gap-4 rounded-lg border border-border bg-card p-4">
@@ -156,4 +156,4 @@
 			</div>
 		</div>
 	</div>
-</div>
+</PageLayout>
