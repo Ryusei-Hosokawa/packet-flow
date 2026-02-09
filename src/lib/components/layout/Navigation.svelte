@@ -58,9 +58,10 @@
   <nav>
     <div
       class="overflow-hidden rounded-[20px] border border-border bg-card shadow-lg backdrop-blur-sm transition-all duration-300"
+			style="max-height: {isMenuOpen ? '100%' : '76px'}"
     >
       <!-- メインナビバー -->
-      <div class="flex items-center justify-between px-6 pt-6 pb-3">
+      <div class="flex items-center justify-between px-6 py-4">
         <!-- ロゴ -->
         <a
           href="/"
@@ -106,9 +107,11 @@
       <!-- ドロップダウンメニュー -->
       <div
         class="grid transition-[grid-template-rows] duration-300"
-        style="grid-template-rows: {isMenuOpen ? '1fr' : '0fr'}"
+        style="
+					grid-template-rows: {isMenuOpen ? '1fr' : '0fr'}
+				"
       >
-        <div class="flex flex-col gap-1 overflow-hidden px-3 pb-3">
+        <div class="flex flex-col gap-1 overflow-hidden px-3 pb-4">
           {#each navItems as item}
             <a
               href={item.href}
