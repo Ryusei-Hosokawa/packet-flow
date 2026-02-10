@@ -140,12 +140,12 @@ function createOSIModelStore() {
 
 	// 選択中のOSI層の詳細
 	const selectedOSILayerData = $derived(
-		selectedOSILayer ? OSI_LAYERS.find((l) => l.number === selectedOSILayer) : null
+		selectedOSILayer ? OSI_LAYERS.find((l) => l.number === selectedOSILayer) ?? null : null
 	);
 
 	// 選択中のTCP/IP層の詳細
 	const selectedTCPIPLayerData = $derived(
-		selectedTCPIPLayer ? TCPIP_LAYERS.find((l) => l.number === selectedTCPIPLayer) : null
+		selectedTCPIPLayer ? TCPIP_LAYERS.find((l) => l.number === selectedTCPIPLayer) ?? null : null
 	);
 
 	// TCP/IP層が選択されたときの対応OSI層
@@ -154,7 +154,7 @@ function createOSIModelStore() {
 	// OSI層が選択されたときの対応TCP/IP層
 	const mappedTCPIPLayer = $derived(
 		selectedOSILayer
-			? TCPIP_LAYERS.find((l) => l.osiMapping.includes(selectedOSILayer))?.number ?? null
+			? TCPIP_LAYERS.find((l) => l.osiMapping.includes(selectedOSILayer!))?.number ?? null
 			: null
 	);
 

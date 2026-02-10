@@ -12,9 +12,9 @@
 	const hasSelection = $derived(osiLayer !== null || tcpipLayer !== null);
 </script>
 
-<div class="min-h-[200px] rounded-lg border border-border bg-card p-4 sm:p-6">
+<div class="min-h-50 rounded-lg border border-border bg-card p-4 sm:p-6">
 	{#if !hasSelection}
-		<div class="flex min-h-[150px] items-center justify-center text-muted-foreground">
+		<div class="flex min-h-38 items-center justify-center text-muted-foreground">
 			<p>レイヤーをクリックして詳細を表示</p>
 		</div>
 	{:else}

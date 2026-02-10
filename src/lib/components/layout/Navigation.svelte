@@ -58,7 +58,7 @@
   <nav>
     <div
       class="overflow-hidden rounded-[20px] border border-border bg-card shadow-lg backdrop-blur-sm transition-all duration-300"
-			style="max-height: {isMenuOpen ? '100%' : '76px'}"
+			style="max-height: {isMenuOpen ? '100%' : '90px'}"
     >
       <!-- メインナビバー -->
       <div class="flex items-center justify-between px-6 py-4">
